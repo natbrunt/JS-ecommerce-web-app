@@ -1,4 +1,5 @@
 # JS-Ecommerce-web-app
+- switch to main-1 to clone
 
 ## Run this project locally
 1) `git clone <repo>`

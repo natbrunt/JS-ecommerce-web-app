@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import axios from 'axios';
-import URL from './../../config'
+import URL from './../config'
 import { FaTrashAlt } from "react-icons/fa";
 import * as jose from 'jose'
 import { useNavigate } from "react-router-dom";
 import { useStripe } from "@stripe/react-stripe-js";
-import stripeImg from '../media/stripeImg.png'
+import stripeImg from '../assets/stripeImg.png'
 
 let Cart = ({myCart, setCart, user}) => {
 

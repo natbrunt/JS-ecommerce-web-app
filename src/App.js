@@ -5,24 +5,24 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import Navbar from "./Navbar";
+import Navbar from "./components/navbar/index.js";
 
-import URL from './config' // Server URL
-import Menu from './E-commerce/views/Menu'
-import Cart from './E-commerce/views/Cart'
-import Login from './root-components/Login'
-import Register from './root-components/Register'
+import URL from './components/config/index.js' // Server URL
+import Menu from './components/menu/index.js'
+import Cart from './components/cart/index.js'
+import Login from './components/login/index.js'
+import Register from './components/register/index.js'
 import * as jose from 'jose'
 
 //stripe
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
-import PaymentSuccess from "./E-commerce/stripe/payment_success";
-import PaymentError from "./E-commerce/stripe/payment_error";
+import PaymentSuccess from "./components/stripe/payment_success";
+import PaymentError from "./components/stripe/payment_error";
 
 //magicLink || Account Recovery
-import Enter from './root-components/Enter.js'
-import AccountRecovery from "./root-components/AccountRecovery.js"
+import Enter from './components/accountRecovery/index.js'
+import AccountRecovery from "./components/accountRecovery/index.js"
 
 function App() {
 
