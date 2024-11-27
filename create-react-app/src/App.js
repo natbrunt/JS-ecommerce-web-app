@@ -1,3 +1,5 @@
+{/* contains two api calls */}
+
 import {
   BrowserRouter as Router,
   Route,
@@ -17,8 +19,8 @@ import * as jose from 'jose'
 //stripe
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
-import PaymentSuccess from "./components/stripe/payment_success";
-import PaymentError from "./components/stripe/payment_error";
+import PaymentSuccess from "./components/stripe/payment_success.js";
+import PaymentError from "./components/stripe/payment_error.js";
 
 //magicLink || Account Recovery
 import Enter from './components/accountRecovery/index.js'

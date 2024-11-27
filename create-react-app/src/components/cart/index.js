@@ -1,6 +1,7 @@
+{/* contains two api calls */}
 import React, {useState} from "react";
 import axios from 'axios';
-import URL from './../config'
+import URL from '../config'
 import { FaTrashAlt } from "react-icons/fa";
 import * as jose from 'jose'
 import { useNavigate } from "react-router-dom";

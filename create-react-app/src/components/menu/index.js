@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import URL from './../config/index'
+import URL from '../config/index'
 import axios from 'axios'
 import * as jose from 'jose'
 import { FaShoppingCart } from "react-icons/fa";
