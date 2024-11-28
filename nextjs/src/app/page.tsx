@@ -41,10 +41,10 @@ function ProductCard({ product }: { product: Product }) {
         <CardDescription className="text-sm text-gray-500 mb-4">{product.description}</CardDescription>
         <div className="flex justify-between items-center">
           <Badge variant="secondary" className="text-lg font-semibold">
-            ${product.price.toFixed(2)}
+            ${Number(product.price / 100 ).toFixed(2)}
           </Badge>
           <Badge variant="outline" className="text-sm">
-            {product.quantity} in stock
+            {product.quantity} serving
           </Badge>
         </div>
       </CardContent>

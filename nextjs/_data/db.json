@@ -1,0 +1,36 @@
+{
+    
+    "products": [
+      {
+          "_id": "6745ec667f444bd8b602dcbc",
+          "id": "1",
+          "image": "bulgogi.png",
+          "name": "Bulgogi Beef Dish",
+          "description": "Insert description here",
+          "price": 1299,
+          "quantity": 1,
+          "__v": 0
+      },
+      {
+          "_id": "6745ec8a7f444bd8b602dcbe",
+          "id": "2",
+          "image": "udon.jpg",
+          "name": "Udon Japanese Soup",
+          "description": "Insert description here",
+          "price": 999,
+          "quantity": 1,
+          "__v": 0
+      },
+      {
+          "_id": "6745eca97f444bd8b602dcc0",
+          "id": "3",
+          "image": "pho.jpg",
+          "name": "Pho Noodle Soup",
+          "description": "Insert description here",
+          "price": 1499,
+          "quantity": 1,
+          "__v": 0
+      }
+  ]
+  }
+
