@@ -1,9 +1,15 @@
-import Image from 'next/image'
+"use client"
+import { useState } from 'react'
 import { Suspense } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import { ProductCard } from '@/components/product-card'
+import { CartProvider } from '../contexts/cart-context';
+import { useCart } from '../contexts/cart-context'
+
+
 
 interface Product {
   id: string,
@@ -14,47 +20,18 @@ interface Product {
   quantity: number
 }
 
+
 async function getProducts(): Promise<Product[]> {
-  const result = await fetch('http://localhost:4040/products/get')
+  //json-server --watch ./_data/db.json --port 4000
+  const result = await fetch('http://localhost:4000/products')
+
+  //mongoosey
+  //const result = await fetch('http://localhost:4040/products/get')
 
   // delay response
   await new Promise((resolve) => setTimeout(resolve, 3000))
 
   return result.json()
-}
-
-function ProductCard({ product }: { product: Product }) {
-  return (
-    <Card className="w-full overflow-hidden transition-all hover:shadow-lg">
-      <CardHeader className="p-0">
-        <div className="relative aspect-square overflow-hidden">
-          <Image 
-            src={`/img/${product.image}`} 
-            alt={product.name}
-            fill
-            className="object-cover transition-all hover:scale-105"
-          />
-        </div>
-      </CardHeader>
-      <CardContent className="p-6">
-        <CardTitle className="text-2xl font-bold mb-2">{product.name}</CardTitle>
-        <CardDescription className="text-sm text-gray-500 mb-4">{product.description}</CardDescription>
-        <div className="flex justify-between items-center">
-          <Badge variant="secondary" className="text-lg font-semibold">
-            ${Number(product.price / 100 ).toFixed(2)}
-          </Badge>
-          <Badge variant="outline" className="text-sm">
-            {product.quantity} serving
-          </Badge>
-        </div>
-      </CardContent>
-      <CardFooter className="p-6 pt-0">
-        <Button className="w-full" size="lg">
-          Buy Now
-        </Button>
-      </CardFooter>
-    </Card>
-  )
 }
 
 function ProductCardSkeleton() {
@@ -79,11 +56,15 @@ function ProductCardSkeleton() {
 }
 
 export default function Home() {
+  const {cartCount} = useCart();
+
   return (
     <main className="mx-auto pb-12 mt-0 max-w-6xl">
-      <Suspense fallback={<ProductGrid loading />}>
-        <ProductList />
-      </Suspense>
+      <CartProvider>
+        <Suspense fallback={<ProductGrid loading />}>
+          <ProductList />
+        </Suspense>
+      </CartProvider>
     </main>
   )
 }

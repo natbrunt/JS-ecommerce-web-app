@@ -4,6 +4,9 @@ import "./globals.css";
 import { ShoppingCart } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Link from "next/link"
+import { ThemeProvider } from "@/components/theme-provider"
+import { ModeToggle } from "@/components/mode-toggle"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,15 +29,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+        >
+        
         <nav className="flex flex-row justify-between">
           <h1>Food Delivery</h1>
           <div className="flex items-center gap-6">
-            <Button variant="secondary" className="hover:bg-slate-300 text-lg">Sign in</Button>
+            <Link href="login/">
+              <Button variant="secondary" className="hover:bg-slate-300 text-lg">Sign in</Button>
+            </Link>
+            <ModeToggle />
             <button className="relative">
               <ShoppingCart className="h-6 w-6 transition-colors group-hover:text-primary mr-6 hover:bg-slate-200" />
               <Badge variant="destructive" className="absolute bottom-5 rounded-3xl right-1">2</Badge>
@@ -42,6 +57,8 @@ export default function RootLayout({
           </div>
         </nav>
         {children}
+        
+        </ThemeProvider>
       </body>
     </html>
   );

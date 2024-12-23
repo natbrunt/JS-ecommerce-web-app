@@ -17,4 +17,7 @@
     magiclink
   /stripe
   
+  # Education
+  - NextJS and React, How to 
+  
 
