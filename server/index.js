@@ -19,31 +19,30 @@ require('dotenv').config({ path: './.env' });
 const PORT = process.env.PORT || 3030;
 mongoose.set('strictQuery', false);
 
-
+//this project has a server folder, still trying to figure out with this mongo URL is going
+//might be best to reconstruct the database to run locally or use mongoatlas with a new collection in mind
 async function connecting(){
     try {
         await mongoose.connect(process.env.MONGO)
-        console.log('Connected to the DB')
+        console.log('Connected to the Mongo Atlas')
     } catch ( error ) {
         console.log('ERROR: Seems like your DB is not running, please start it up !!!');
     }
     }
     connecting()
     
-    //Ecommerce
-    app.use('/payment', require('./E-commerce/routes/payment.route.js'));
-    app.use('/Guest', require('./E-commerce/routes/guestRoutes.js'));
-    /*One guest user of the username: guest@gmail.com needs to be added via post man
-    with the password: guest, this is just to simplify the demo*/
-    app.use('/Products', require('./E-commerce/routes/productRoutes.js'));
     
-    //add products with a POST request to http://localhost:3030/Products/add
+    app.use('/payment', require('./E-commerce/routes/payment.route.js'));
+    
+    app.use('/Guest', require('./E-commerce/routes/guestRoutes.js'));
+    
+    app.use('/Products', require('./E-commerce/routes/productRoutes.js'));
 
-    //images are stored in server folder not client
+    //images
     app.use('/assets', express.static(path.join(__dirname, 'static')))
-    //so when adding a product img, you only will need the name of the file not the pwd
+    
 
-    /* web host (only for deployment purposes)
+    /* (working only in local developement)
     app.use(express.static(__dirname));
     app.use(express.static(path.join(__dirname, '../client/build')));
     
