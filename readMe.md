@@ -1,13 +1,7 @@
 ## JS-Ecommerce-web-app
 
-As far as making this code more readable is convered, there are a lot of strangely named folders, and unnecessary routes
-also the stripe implementation freaks me out the most.
+project is still under construction as this was one of my first projects, however, it has a lot of industry standard vanilla javascript features including magic link and stripeJs
 
-There isn't a clear understanding of where all the .envs are throughout the project.
-Also there is a lot of user authentication through the code, which means this application is like 75% backend 25% front-end.
-It just seems that there is a lot of front-end code, that could just be taken care of in the backend in a more simple way.
-
-For now, I should just run both folders and see if I can simplify the code to provide a map for how to clean up the project.
 - npm i in each folder
 - make note of all .envs
 - connect to a local cluster and not something remote
