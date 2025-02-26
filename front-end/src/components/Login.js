@@ -2,12 +2,11 @@ import axios from "axios";
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-//config
-import URL from '../config'
 
 let Login = ({loginHandle}) => {
 
-
+	
+  const URL = process.env.REACT_APP_SERVER_URL;
   const [form, setValues] = useState({
     username: "",
     password: "",
@@ -22,7 +21,7 @@ let Login = ({loginHandle}) => {
 		console.log("submit")
 		try{
 		const response = await 
-		axios.post(URL+'/Guest/login', 
+		axios.post(URL+'/jwt-users/login', 
 		{username: form.username,
         password: form.password,});
 		if(response.data.ok){

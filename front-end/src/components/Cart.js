@@ -1,15 +1,13 @@
 import React, {useState} from "react";
 import axios from 'axios';
-import URL from './../../config'
 import { FaTrashAlt } from "react-icons/fa";
 import * as jose from 'jose'
 import { useNavigate } from "react-router-dom";
 import { useStripe } from "@stripe/react-stripe-js";
-import stripeImg from '../media/stripeImg.png'
 
 let Cart = ({myCart, setCart, user}) => {
 
-
+const URL = process.env.REACT_APP_SERVER_URL;
 //stripe
 const navigate = useNavigate();
 const stripe = useStripe();
@@ -62,7 +60,7 @@ const calculate_total = () => {
 
 const deleteCartItem = async(prodId) => {
     try {
-        const res = await axios.post(URL+'/Guest/deleteCartItem',{username: user, id: prodId})
+        const res = await axios.post(URL+'/jwt-users/deleteCartItem',{username: user, id: prodId})
         if(res.data.ok == true){
             let decodedToken = jose.decodeJwt(res.data.token);
             setCart(decodedToken.cart)
@@ -137,7 +135,7 @@ onClick={()=> createCheckoutSession()}>STRIPE</button>
     for personal info, Stripe here is only for demonstration.
   </p>
   <p className="italic font-bold">For example</p>
-  <img src={stripeImg} className="border-2 rounded-3xl mb-1 w-3/4"></img>
+  {/* <img src={stripeImg} className="border-2 rounded-3xl mb-1 w-3/4"></img> */}
 </div>
 }
 </div>

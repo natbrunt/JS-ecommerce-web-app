@@ -32,7 +32,7 @@ import * as jose from 'jose'
 
 function App() {
 
-  const URL = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
+  const URL = process.env.REACT_APP_SERVER_URL;
 
   //json-web-token
     const [user, setUser] = useState(null);
@@ -90,7 +90,7 @@ useEffect(()=> {
     const fetchData = async () => {
     try{
       const response = await axios.get(URL+'/Products/');
-      //console.log(response)
+      console.log(response)
       setMenu(response.data);
     }catch(e){  
       console.log(e)

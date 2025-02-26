@@ -1,11 +1,10 @@
 import {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-//config
-import URL from '../config'
+
 
 let Register = ({loginHandle}) => {
-
+  const URL = process.env.REACT_APP_SERVER_URL;
  	const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
 
@@ -20,7 +19,7 @@ let Register = ({loginHandle}) => {
   }
 
   let addUser=()=>{
-    axios.post(URL+'/Guest/addGuest', {username:input1,
+    axios.post(URL+'/jwt-users/addGuest', {username:input1,
     password:input2})
     .then((res)=>{
       if(res.data.ok === false)

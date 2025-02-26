@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-//config
-import URL from '../../config'
+
 import { useNavigate } from "react-router-dom";
 
 const PaymentSuccess = ({setCart}) => {
+  const URL = process.env.REACT_APP_SERVER_URL;
   let navigate = useNavigate()
   useEffect(() => {
     const getSessionData = async () => {

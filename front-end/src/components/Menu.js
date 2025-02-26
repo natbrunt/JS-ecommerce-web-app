@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import URL from './../../config'
 import axios from 'axios'
 import * as jose from 'jose'
 import { FaShoppingCart } from "react-icons/fa";
@@ -10,6 +9,7 @@ import { FaShoppingCart } from "react-icons/fa";
 let Menu = ({MenuList, setCart, user, logout}) => {
 
     let navigate = useNavigate()
+    const URL = process.env.REACT_APP_SERVER_URL;
     
 
     /* JavaScript is expecting to get a list of objects to display
@@ -25,48 +25,80 @@ let Menu = ({MenuList, setCart, user, logout}) => {
     
     */
     let [isHovering, setIsHovering] = useState({})
-	let renderProducts=()=>(
-        MenuList.map((prod,idx)=>{
-        let thisPrice = parseFloat(prod.price * .01).toFixed(2);
-        const handleMouseEnter = () => setIsHovering({ ...isHovering, [idx]: true });
-        const handleMouseLeave = () => setIsHovering({ ...isHovering, [idx]: false });
+	// let renderProducts=()=>(
+    //     MenuList.map((prod,idx)=>{
+    //     let thisPrice = parseFloat(prod.price * .01).toFixed(2);
+    //     const handleMouseEnter = () => setIsHovering({ ...isHovering, [idx]: true });
+    //     const handleMouseLeave = () => setIsHovering({ ...isHovering, [idx]: false });
   
-        return(
-            <div key={idx} className="flex flex-col items-center mb-3">
+    //     return(
+    //         <div key={idx} className="flex flex-col items-center py-2 lg:flex-row border-b-2 lg:mx-32">
             
-            {/* a hover add to cart text would look best on the img */}
-            <img 
-                className="w-72 h-72 rounded-3xl cursor-pointer" 
-                src={URL+"/assets/" + prod.image}
-                onMouseEnter={() => setIsHovering({ ...isHovering, [idx]: true })}
-                onMouseLeave={() => setIsHovering({ ...isHovering, [idx]: false })}>
-            </img>
+    //         {/* a hover add to cart text would look best on the img */}
+    //         <img 
+    //             className="w-72 h-72 rounded-3xl cursor-pointer" 
+    //             src={URL+"/assets/" + prod.image}
+    //             onMouseEnter={() => setIsHovering({ ...isHovering, [idx]: true })}
+    //             onMouseLeave={() => setIsHovering({ ...isHovering, [idx]: false })}>
+    //         </img>
 
-            {isHovering[idx] && (
-            <div className="absolute mt-32"
-            onMouseEnter={() => setIsHovering({ ...isHovering, [idx]: true })}
-            >
-                <button className=' bg-slate-300 hover:bg-slate-500
-              text-black font-bold p-3 rounded-3xl' 
-                onClick={() => AddToCart(idx)}>Add to cart</button>	
-            </div>
-            )}
+    //         {isHovering[idx] && (
+    //         <div className="absolute mt-32"
+    //         onMouseEnter={() => setIsHovering({ ...isHovering, [idx]: true })}
+    //         >
+    //             <button className=' bg-slate-300 hover:bg-slate-500
+    //           text-black font-bold p-3 rounded-3xl' 
+    //             onClick={() => AddToCart(idx)}>Add to cart</button>	
+    //         </div>
+    //         )}
 
-            <div id="name + addToCart button"
-            className="flex flex-row items-center justify-between gap-x-20 mt-1">
-                <div className="text-2xl" ><b>{prod.name.charAt(0).toUpperCase()+ prod.name.slice(1)}</b></div>
+    //         <div id="name + addToCart button"
+    //         className="flex flex-row items-center justify-between gap-x-20 mt-1">
+    //             <div className="text-2xl" ><b>{prod.name.charAt(0).toUpperCase()+ prod.name.slice(1)}</b></div>
                 
-            </div>
+    //         </div>
             
             
-            <p style={{ fontSize: '22px'}}><b>{thisPrice}€</b></p>
-            <p className="w-96 text-center" >{prod.description}</p>
-            <p className='italic'>Quantity: {prod.quantity}</p>
+    //         <p style={{ fontSize: '22px'}}><b>{thisPrice}€</b></p>
+    //         <p className="w-96 text-center" >{prod.description}</p>
+    //         <p className='italic'>Quantity: {prod.quantity}</p>
 
+    //         </div>
+    //     )
+    //     })
+    // )
+
+
+    const renderProducts = () => (
+        MenuList.map((prod, idx) => {
+          let thisPrice = (prod.price * 0.01).toFixed(2);
+      
+          return (
+            <div 
+              key={idx} 
+              className="flex flex-col lg:flex-row items-center py-4 border-b-2 lg:mx-32 relative 
+                         group cursor-pointer transition duration-300 hover:bg-gray-100"
+              onClick={() => AddToCart(idx)}  // Clicking anywhere adds to cart
+            >
+              {/* Product Image */}
+              <img 
+                className="w-72 h-72 rounded-3xl transition duration-300 group-hover:brightness-75" 
+                src={`${URL}/assets/${prod.image}`} 
+              />
+      
+              {/* Product Details */}
+              <div className="flex flex-col items-center lg:items-start lg:ml-10 text-center lg:text-left">
+                <div className="text-2xl font-bold">{prod.name.charAt(0).toUpperCase() + prod.name.slice(1)}</div>
+                <p className="text-xl font-bold">{thisPrice}€</p>
+                <p className="w-96">{prod.description}</p>
+                <p className="italic">Quantity: {prod.quantity}</p>
+              </div>
             </div>
-        )
+          );
         })
-    )
+      );
+      
+      
 
     let AddToCart = (number) =>
     {
@@ -75,7 +107,7 @@ let Menu = ({MenuList, setCart, user, logout}) => {
     let menuItem = {}
     menuItem = MenuList[parseInt(number)];
     //setCart with the newCart data using a token to store it in LocalStorage
-    axios.post(URL+'/Guest/addItem', 
+    axios.post(URL+'/jwt-users/addItem', 
         {username:user, product: menuItem})
     .then((res) => {
         let decodedToken = jose.decodeJwt(res.data.token);
