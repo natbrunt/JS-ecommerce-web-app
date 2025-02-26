@@ -1,5 +1,3 @@
-import React from 'react'
-
 const calculate_total = () => {
   let total = 0;
   props.cart.forEach((ele) => (total += ele.quantity * ele.price));
@@ -8,4 +6,4 @@ const calculate_total = () => {
 };
 
 
-export default cartCofig
+export default calculate_total

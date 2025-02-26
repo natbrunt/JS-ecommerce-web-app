@@ -1,4 +1,5 @@
-const Customer = require('../models/Customer.js');
+const Customer = require('../models/jwt-user.js');
+
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 //magic link

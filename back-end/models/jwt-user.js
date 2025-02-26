@@ -29,4 +29,4 @@ const customerSchema = new mongoose.Schema({
 {strictQuery: false}
 );
 
-module.exports = mongoose.model("customers", customerSchema);
+module.exports = mongoose.model("jwt-user", customerSchema);

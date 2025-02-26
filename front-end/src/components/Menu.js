@@ -5,6 +5,8 @@ import axios from 'axios'
 import * as jose from 'jose'
 import { FaShoppingCart } from "react-icons/fa";
 
+/* huge walls of tailwind css make this thing unreadable, */
+
 let Menu = ({MenuList, setCart, user, logout}) => {
 
     let navigate = useNavigate()

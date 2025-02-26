@@ -1,6 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const jwt = require("jsonwebtoken");
-const Customer = require('../models/Customer.js');
+const Customer = require('../models/jwt-user.js');
 const dotenv = require('dotenv');
 dotenv.config();
 
