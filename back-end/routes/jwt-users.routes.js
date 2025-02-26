@@ -1,6 +1,6 @@
 const express     = require('express'),
     router        = express.Router(),
-    controller    = require('../controllers/guestController.js');
+    controller    = require('../controllers/jwt-users-controller.js');
 
 //findAllGuests
 //router.get('/', controller.findAllUsers);
