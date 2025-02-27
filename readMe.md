@@ -4,7 +4,7 @@ project is still under construction as this was one of my first projects, howeve
 
 - npm i in each folder
 - make note of all .envs
-- connect to a local cluster in development in preferable
+- connect to a local cluster in development is preferable
 
 
 ## Run this project locally
